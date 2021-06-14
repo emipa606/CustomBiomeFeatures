@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <CBF.SelectBiome>Add biome</CBF.SelectBiome>
+  <CBF.Recache>Recache data</CBF.Recache>
+  <CBF.Hilliness_Settings>Hilliness settings (checked = allowed)</CBF.Hilliness_Settings>
+  <CBF.AllowRoads>Allow roads</CBF.AllowRoads>
+  <CBF.AllowRivers>Allow rivers</CBF.AllowRivers>
+  <CBF.AllowCaves>Allow caves</CBF.AllowCaves>
+  <CBF.AllowGeysers>Allow geysers</CBF.AllowGeysers>
+  <CBF.AllowRuins>Allow ruins</CBF.AllowRuins>
+  <CBF.Other_Settings>Other settings</CBF.Other_Settings>
+</LanguageData>

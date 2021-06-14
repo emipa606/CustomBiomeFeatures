@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31005.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomBiomeFeatures", "CustomBiomeFeatures\CustomBiomeFeatures.csproj", "{10ADBC93-8CAA-4676-8779-90B3997B0068}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{10ADBC93-8CAA-4676-8779-90B3997B0068}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10ADBC93-8CAA-4676-8779-90B3997B0068}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10ADBC93-8CAA-4676-8779-90B3997B0068}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10ADBC93-8CAA-4676-8779-90B3997B0068}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9279B83C-9A13-48DE-A8BA-5C3CA696B304}
+	EndGlobalSection
+EndGlobal
