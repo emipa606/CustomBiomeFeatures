@@ -139,6 +139,8 @@ namespace CustomBiomeFeatures
                 return false;
             }
 
+            biomeSettings = biomeSettings.Where(featureSettings => featureSettings.BiomeDef != null).ToList();
+
             if (biomeSettingsMap == null || !biomeSettingsMap.ContainsKey(biomeDef))
             {
                 biomeSettingsMap = biomeSettings.ToDictionary(k => k.BiomeDef, v => v);
