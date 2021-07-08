@@ -92,7 +92,7 @@ namespace CustomBiomeFeatures
                 }
 
                 Find.WorldGrid.GetTileNeighbors(i, list2);
-                var flag = false;
+                var b = false;
                 foreach (var tileId in list2)
                 {
                     if (Find.WorldGrid[tileId].biome == BiomeDefOf.Ocean)
@@ -100,11 +100,11 @@ namespace CustomBiomeFeatures
                         continue;
                     }
 
-                    flag = true;
+                    b = true;
                     break;
                 }
 
-                if (flag)
+                if (b)
                 {
                     list.Add(i);
                 }

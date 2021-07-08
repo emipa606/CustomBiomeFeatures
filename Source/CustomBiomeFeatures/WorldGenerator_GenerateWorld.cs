@@ -5,8 +5,7 @@ using Verse;
 
 namespace CustomBiomeFeatures
 {
-    [HarmonyPatch(typeof(WorldGenerator), "GenerateWorld", typeof(float), typeof(string), typeof(OverallRainfall),
-        typeof(OverallTemperature), typeof(OverallPopulation))]
+    [HarmonyPatch(typeof(WorldGenerator), "GenerateWorld")]
     [HarmonyPriority(100)]
     public class WorldGenerator_GenerateWorld
     {

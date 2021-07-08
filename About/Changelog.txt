@@ -1,5 +1,8 @@
 # Changelog for CustomBiomeFeatures
 
+1.0.2.0 - Mod updated for 1.3 and passed autotests
+
+
 1.0.1.0 - No longer causes error if a biome is defined in settings and then removed from the game (via other mod)
 
 
