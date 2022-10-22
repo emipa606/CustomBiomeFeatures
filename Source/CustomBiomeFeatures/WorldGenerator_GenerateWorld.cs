@@ -3,125 +3,124 @@ using HarmonyLib;
 using RimWorld.Planet;
 using Verse;
 
-namespace CustomBiomeFeatures
+namespace CustomBiomeFeatures;
+
+[HarmonyPatch(typeof(WorldGenerator), "GenerateWorld")]
+[HarmonyPriority(100)]
+public class WorldGenerator_GenerateWorld
 {
-    [HarmonyPatch(typeof(WorldGenerator), "GenerateWorld")]
-    [HarmonyPriority(100)]
-    public class WorldGenerator_GenerateWorld
+    private static void Postfix()
     {
-        private static void Postfix()
+        LongEventHandler.ExecuteWhenFinished(() =>
         {
-            LongEventHandler.ExecuteWhenFinished(() =>
-            {
-                if (!CustomBiomeFeaturesMod.CustomBiomeFeaturesSettings.BiomeSettings.Any())
-                {
-                    return;
-                }
-
-                ClearRoads();
-                ClearRivers();
-
-                CheckTilesHilliness();
-
-                EnsureElevation();
-            });
-        }
-
-        private static void EnsureElevation()
-        {
-            var biomes = CustomBiomeFeaturesMod.CustomBiomeFeaturesSettings.BiomeSettings
-                .Where(x => x.allowRoads || x.allowRoads)
-                .Select(x => x.BiomeDef).ToList();
-
-            for (var tileID = 0; tileID < Find.WorldGrid.TilesCount; tileID++)
-            {
-                var tile = Find.WorldGrid[tileID];
-
-                if (tile.potentialRoads == null && tile.potentialRivers == null || !biomes.Contains(tile.biome))
-                {
-                    continue;
-                }
-
-                if (tile.elevation <= 0)
-                {
-                    tile.elevation = 1;
-                }
-            }
-        }
-
-        private static void CheckTilesHilliness()
-        {
-            var hillinessMap =
-                CustomBiomeFeaturesMod.CustomBiomeFeaturesSettings.BiomeSettings.ToDictionary(k => k.BiomeDef,
-                    v => v.allowedHilliness);
-
-            if (!hillinessMap.Any())
+            if (!CustomBiomeFeaturesMod.CustomBiomeFeaturesSettings.BiomeSettings.Any())
             {
                 return;
             }
 
-            for (var tileID = 0; tileID < Find.WorldGrid.TilesCount; tileID++)
+            ClearRoads();
+            ClearRivers();
+
+            CheckTilesHilliness();
+
+            EnsureElevation();
+        });
+    }
+
+    private static void EnsureElevation()
+    {
+        var biomes = CustomBiomeFeaturesMod.CustomBiomeFeaturesSettings.BiomeSettings
+            .Where(x => x.allowRoads)
+            .Select(x => x.BiomeDef).ToList();
+
+        for (var tileID = 0; tileID < Find.WorldGrid.TilesCount; tileID++)
+        {
+            var tile = Find.WorldGrid[tileID];
+
+            if (tile.potentialRoads == null && tile.potentialRivers == null || !biomes.Contains(tile.biome))
             {
-                var tile = Find.WorldGrid[tileID];
+                continue;
+            }
 
-                if (!hillinessMap.TryGetValue(tile.biome, out var hillAllow))
-                {
-                    continue;
-                }
-
-                if (!hillAllow.TryGetValue(tile.hilliness, out var value))
-                {
-                    continue;
-                }
-
-                if (!value)
-                {
-                    tile.hilliness = Hilliness.Flat;
-                }
+            if (tile.elevation <= 0)
+            {
+                tile.elevation = 1;
             }
         }
+    }
 
-        private static void ClearRoads()
+    private static void CheckTilesHilliness()
+    {
+        var hillinessMap =
+            CustomBiomeFeaturesMod.CustomBiomeFeaturesSettings.BiomeSettings.ToDictionary(k => k.BiomeDef,
+                v => v.allowedHilliness);
+
+        if (!hillinessMap.Any())
         {
-            var biomes = CustomBiomeFeaturesMod.CustomBiomeFeaturesSettings.BiomeSettings.Where(x => !x.allowRoads)
-                .Select(x => x.BiomeDef)
-                .ToList();
-
-            if (biomes.Count == 0)
-            {
-                return;
-            }
-
-            for (var tileID = 0; tileID < Find.WorldGrid.TilesCount; tileID++)
-            {
-                var tile = Find.WorldGrid[tileID];
-
-                if (biomes.Contains(tile.biome))
-                {
-                    tile.potentialRoads = null;
-                }
-            }
+            return;
         }
 
-        private static void ClearRivers()
+        for (var tileID = 0; tileID < Find.WorldGrid.TilesCount; tileID++)
         {
-            var biomes = CustomBiomeFeaturesMod.CustomBiomeFeaturesSettings.BiomeSettings.Where(x => !x.allowRivers)
-                .Select(x => x.BiomeDef)
-                .ToList();
+            var tile = Find.WorldGrid[tileID];
 
-            if (biomes.Count == 0)
+            if (!hillinessMap.TryGetValue(tile.biome, out var hillAllow))
             {
-                return;
+                continue;
             }
 
-            for (var tileID = 0; tileID < Find.WorldGrid.TilesCount; tileID++)
+            if (!hillAllow.TryGetValue(tile.hilliness, out var value))
             {
-                var tile = Find.WorldGrid[tileID];
+                continue;
+            }
 
-                if (biomes.Contains(tile.biome))
-                {
-                    tile.potentialRivers = null;
-                }
+            if (!value)
+            {
+                tile.hilliness = Hilliness.Flat;
+            }
+        }
+    }
+
+    private static void ClearRoads()
+    {
+        var biomes = CustomBiomeFeaturesMod.CustomBiomeFeaturesSettings.BiomeSettings.Where(x => !x.allowRoads)
+            .Select(x => x.BiomeDef)
+            .ToList();
+
+        if (biomes.Count == 0)
+        {
+            return;
+        }
+
+        for (var tileID = 0; tileID < Find.WorldGrid.TilesCount; tileID++)
+        {
+            var tile = Find.WorldGrid[tileID];
+
+            if (biomes.Contains(tile.biome))
+            {
+                tile.potentialRoads = null;
+            }
+        }
+    }
+
+    private static void ClearRivers()
+    {
+        var biomes = CustomBiomeFeaturesMod.CustomBiomeFeaturesSettings.BiomeSettings.Where(x => !x.allowRivers)
+            .Select(x => x.BiomeDef)
+            .ToList();
+
+        if (biomes.Count == 0)
+        {
+            return;
+        }
+
+        for (var tileID = 0; tileID < Find.WorldGrid.TilesCount; tileID++)
+        {
+            var tile = Find.WorldGrid[tileID];
+
+            if (biomes.Contains(tile.biome))
+            {
+                tile.potentialRivers = null;
             }
         }
     }

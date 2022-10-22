@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
+  <CBF.ModVersion>Installed mod-version: {0}</CBF.ModVersion>
   <CBF.SelectBiome>Add biome</CBF.SelectBiome>
   <CBF.Recache>Recache data</CBF.Recache>
   <CBF.Hilliness_Settings>Hilliness settings (checked = allowed)</CBF.Hilliness_Settings>
