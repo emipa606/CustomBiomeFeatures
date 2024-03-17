@@ -52,8 +52,8 @@ public class WorldGenStep_Terrain_GenerateTileFor
         tile.elevation = ((ModuleBase)noiseElevationField.GetValue(__instance)).GetValue(tileCenter);
         HillinessFor(__instance, tile, tileCenter);
         var num = (float)BaseTemperatureAtLatitudeMethod.Invoke(__instance,
-            new object[] { Find.WorldGrid.LongLatOf(tileID).y });
-        num -= (float)TemperatureReductionAtElevationMethod.Invoke(__instance, new object[] { tile.elevation });
+            [Find.WorldGrid.LongLatOf(tileID).y]);
+        num -= (float)TemperatureReductionAtElevationMethod.Invoke(__instance, [tile.elevation]);
         num += ((ModuleBase)noiseTemperatureOffsetField.GetValue(__instance)).GetValue(tileCenter);
         var temperatureCurve = Find.World.info.overallTemperature.GetTemperatureCurve();
         if (temperatureCurve != null)
@@ -75,7 +75,7 @@ public class WorldGenStep_Terrain_GenerateTileFor
             tile.swampiness = ((ModuleBase)noiseSwampinessField.GetValue(__instance)).GetValue(tileCenter);
         }
 
-        tile.biome = (BiomeDef)BiomeFromMethod.Invoke(__instance, new object[] { tile, tileID });
+        tile.biome = (BiomeDef)BiomeFromMethod.Invoke(__instance, [tile, tileID]);
 
         if (CustomBiomeFeaturesMod.CustomBiomeFeaturesSettings.TryGetSettings(tile.biome, out _))
         {

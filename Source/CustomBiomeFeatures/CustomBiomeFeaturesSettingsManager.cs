@@ -50,7 +50,7 @@ public class CustomBiomeFeaturesSettingsManager : ModSettings
                 {
                     if (biomeSettings == null)
                     {
-                        biomeSettings = new List<BiomeFeatureSettings>();
+                        biomeSettings = [];
                     }
 
                     biomeSettings?.Add(new BiomeFeatureSettings(biomeDef));
@@ -104,8 +104,8 @@ public class CustomBiomeFeaturesSettingsManager : ModSettings
 
     public static void SaveVanilla()
     {
-        allowsRivers = new List<BiomeDef>();
-        allowsRoads = new List<BiomeDef>();
+        allowsRivers = [];
+        allowsRoads = [];
         foreach (var biomeDef in DefDatabase<BiomeDef>.AllDefsListForReading)
         {
             if (biomeDef.allowRoads)

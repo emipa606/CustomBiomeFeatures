@@ -12,15 +12,15 @@ namespace CustomBiomeFeatures;
 [HarmonyPriority(100)]
 public class WorldGenStep_Rivers_GenerateRivers
 {
-    private static readonly SimpleCurve ElevationChangeCost = new SimpleCurve
-    {
+    private static readonly SimpleCurve ElevationChangeCost =
+    [
         new CurvePoint(-1000f, 50f),
         new CurvePoint(-100f, 100f),
         new CurvePoint(0f, 400f),
         new CurvePoint(0f, 5000f),
         new CurvePoint(100f, 50000f),
         new CurvePoint(1000f, 50000f)
-    };
+    ];
 
     public static bool Prefix(ref WorldGenStep_Rivers __instance)
     {

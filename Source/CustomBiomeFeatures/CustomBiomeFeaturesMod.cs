@@ -19,8 +19,7 @@ public class CustomBiomeFeaturesMod : Mod
 
         CustomBiomeFeaturesSettings = GetSettings<CustomBiomeFeaturesSettingsManager>();
         currentVersion =
-            VersionFromManifest.GetVersionFromModMetaData(
-                ModLister.GetActiveModWithIdentifier("Mlie.CustomBiomeFeatures"));
+            VersionFromManifest.GetVersionFromModMetaData(content.ModMetaData);
     }
 
     public override string SettingsCategory()
